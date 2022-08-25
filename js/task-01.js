@@ -1,13 +1,12 @@
-const refs = {
-  categories: document.getElementById("categories"),
-  items: document.querySelectorAll(".item"),
-  titles: document.querySelectorAll(".item>h2"),
-  list: document.querySelectorAll(".item>ul"),
-};
+const categories = document.getElementById("categories");
+console.log(`Number of categories: ${categories.children.length}`);
 
-console.log(`Number of categories: ${refs.items.length}`);
+let i = 0;
 
-refs.items.forEach((item, i) => {
-  console.log(`Category: ${refs.titles[i].innerText}
-Elements: ${refs.list[i].childElementCount}`);
-});
+for (const item of categories.children) {
+  const title = categories.children[i].firstElementChild.innerText;  
+  const list = categories.children[i].lastElementChild;
+  console.log(`Category: ${title}`);
+  console.log(`Elements: ${list.childElementCount}`);
+  i++;
+}

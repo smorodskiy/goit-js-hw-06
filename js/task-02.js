@@ -9,8 +9,8 @@ const ingredients = [
 
 const ingredientsElement = document.getElementById("ingredients");
 
-// copy of UL without child
-const list = ingredientsElement.cloneNode(false);
+// Create HTML collection
+const list = document.createDocumentFragment();
 
 ingredients.forEach(elem => {  
   const li = document.createElement('li');
@@ -20,5 +20,5 @@ ingredients.forEach(elem => {
 })
 
 // by one operation add to html
-ingredientsElement.parentNode.replaceChild(list, ingredientsElement);
+ingredientsElement.appendChild(list);
 

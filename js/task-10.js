@@ -1,6 +1,6 @@
 const input = document.querySelector("input");
 const buttons = document.querySelectorAll("button");
-let div = document.getElementById("boxes");
+let divRoot = document.getElementById("boxes");
 
 // Attaching
 buttons.forEach((button) => {
@@ -8,6 +8,7 @@ buttons.forEach((button) => {
     const event = e.currentTarget;
     // Check attr
     if (event.hasAttribute("data-create")) {
+      destroyBoxes();
       createBoxes(input.value);
     } else destroyBoxes();
   });
@@ -15,7 +16,7 @@ buttons.forEach((button) => {
 
 // Create boxes
 function createBoxes(amount) {
-  const divNew = div.cloneNode(false);
+  const divTempFragment = document.createDocumentFragment();
   let mul = 0;
 
   for (let i = 0; i < amount; i++) {
@@ -23,18 +24,17 @@ function createBoxes(amount) {
     div.style.height = 30 + mul + "px";
     div.style.width = 30 + mul + "px";
     div.style.backgroundColor = getRandomHexColor();
-    divNew.appendChild(div);
+    divTempFragment.appendChild(div);
     mul += 10;
   }
 
   // by one operation add to html
-  div.parentNode.replaceChild(divNew, div);
-  div = document.getElementById("boxes");
+  divRoot.appendChild(divTempFragment)
 }
 
 // Remove boxes
 function destroyBoxes() {
-  div.innerHTML = "";
+  divRoot.innerHTML = "";
 }
 
 // Random color

@@ -13,27 +13,22 @@ const images = [
   },
 ];
 
-const galleryElement = document.querySelector(".gallery");
+const oldGallery = document.querySelector(".gallery");
 
-// copy of UL without child
-const list = galleryElement.cloneNode(false);
-list.style.display = "flex";
-list.style.flexDirection = "column";
+// copy of UL
+const newGallery = oldGallery.cloneNode(true);
+newGallery.style.display = "flex";
+newGallery.style.flexDirection = "column";
 
 images.forEach((img) => {
-  const liElement = document.createElement("li");
-  
-  liElement.style.width = 100 + '%';  
+  newGallery.insertAdjacentHTML(
+    "afterbegin",
 
-  liElement.insertAdjacentHTML("afterbegin",
-  `
-  <img src="${img.url}" alt="${img.alt}" style="width: 100%"></img>
-  
-  `
-  );  
-
-  list.appendChild(liElement);
+    `<li style="width: 100%">
+      <img src="${img.url}" alt="${img.alt}" style="width: 100%"></img>
+    </li>`
+  );
 });
 
 // by one operation add to html
-galleryElement.parentNode.replaceChild(list, galleryElement);
+oldGallery.parentNode.replaceChild(newGallery, oldGallery);
